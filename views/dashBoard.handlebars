@@ -1,29 +1,50 @@
-<div
-  class="col-11 col-md-8 col-lg-7 mx-auto h-75 d-flex flex-column justify-content-center"
->
+<!-- -->
+<!-- -->
+<!-- -->
+
+<!-- Your posts-->
+
+<div class="mt-5">
+  <div class="col-11 col-md-8 col-lg-8 mx-auto d-flex justify-content-center">
+    <div class="accordion col-12" id="accordionExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+          <button class="accordion-button bg-success bg-opacity-25" type="button" data-bs-toggle="collapse"
+            data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            <h3 type="text" class="blogPostTitle" name="|" id="|">Accordion Item #1</h3>
+            <input class="d-none blogPostTitleInput p-2 rounded-2" type="text" name="|" id="|" value="Accordion Item #1" disabled></input>
+          </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse show col-12" aria-labelledby="headingOne"
+          data-bs-parent="#accordionExample">
+          <div class="accordion-body d-flex flex-column">
+            <textarea name="newPostDescription" class="form-control newPostDescription" id="newPostDescription" rows="3" disabled >Lorem ipsum dolor sit amet consectetur, adipisicing elit. Est ut magnam unde dolores? Praesentium nisi, iure necessitatibus atque possimus delectus?
+        </textarea>
+            <div class="col-12 d-flex justify-content-end ">
+              <button type="button" class="btn btn-success col-auto  ms-2 mt-2 text-decoration-none text-white updatePostButton">
+                Update Post / Done
+              </button>
+              <button type="button" class="btn btn-success col-auto ms-2 mt-2 text-decoration-none text-white deletePostButton">
+                Delete
+              </button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Create Post-->
+<div class="d-none col-11 col-md-8 col-lg-7 mx-auto h-75 d-flex flex-column justify-content-center">
   <div class="mb-3">
     <label for="newPostTitle" class="form-label">Title</label>
-    <input
-      type="text"
-      class="form-control"
-      id="newPostTitle"
-      placeholder="name@example.com"
-    />
+    <input type="text" class="form-control" id="newPostTitle" placeholder="name@example.com" />
   </div>
   <div class="mb-3">
     <label for="newPostDescription" class="form-label">Description</label>
     <textarea class="form-control" id="newPostDescription" rows="3"></textarea>
-  </div>
-</div>
-
-<div class="col-11 col-md-8 col-lg-8 mx-auto d-flex justify-content-center">
-  <div class="card col-12">
-    <div class="card-body bg-success bg-opacity-25">
-      This is some text within a card body.
-    </div>
-    <div class="card-body">This is some text within a card body.</div>
-    <button type="button" class="btn btn-success col-2 ms-auto m-1">
-      <a href="/" class="text-decoration-none text-white">Go To Post</a>
-    </button>
   </div>
 </div>
