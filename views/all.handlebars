@@ -1,11 +1,17 @@
-<div class="col-11 col-md-8 col-lg-8 mx-auto d-flex justify-content-center">
-  <div class="card col-12">
-    <div class="card-body bg-success bg-opacity-25">
-      This is some text within a card body.
+{{#each allPost}}
+  <div
+    class="col-11 col-md-8 col-lg-8 mx-auto d-flex justify-content-center my-3"
+  >
+    <div class="card col-12">
+      <div class="card-body bg-success bg-opacity-25">
+        {{post_title}}
+      </div>
+      <div class="card-body">{{post_text}}</div>
+      <button type="button" class="btn btn-success col-2 ms-auto m-1">
+        <a href="/post/{{id}}" class="text-decoration-none text-white">Go To
+          Post</a>
+      </button>
     </div>
-    <div class="card-body">This is some text within a card body.</div>
-    <button type="button" class="btn btn-success col-2 ms-auto m-1">
-      <a href="/" class="text-decoration-none text-white">Go To Post</a>
-    </button>
   </div>
-</div>
+
+{{/each}}
