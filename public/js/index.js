@@ -20,3 +20,15 @@ updatePostButtonEl.click(function () {
     newPostDescriptionEl.prop("disabled", true);
   }
 });
+
+function showCreatePostContainer() {
+  $("#createPost__container")
+    .removeClass("createPost__container--hidden")
+    .addClass("createPost__container");
+}
+
+function closeCreatePostContainer() {
+  $("#createPost__container")
+    .removeClass("createPost__container")
+    .addClass("createPost__container--hidden");
+}
