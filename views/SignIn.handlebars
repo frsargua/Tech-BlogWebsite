@@ -5,11 +5,12 @@
     <div class="mb-3">
       <label for="signInEmail" class="form-label">Email address</label>
       <input
-        type="email"
-        name="SignInInputUserEmail"
+        type="text"
+        name="user_name"
         class="form-control"
         id="signInEmail"
         aria-describedby="emailHelp"
+        required
       />
       <div id="emailHelp" class="form-text">
         We encrypt your password using an open source hasher.
@@ -18,10 +19,11 @@
     <div class="mb-3">
       <label for="signInPassword" class="form-label">Password</label>
       <input
-        type="password"
-        name="SignInInputUserPassword"
+        type="text"
+        name="password"
         class="form-control"
         id="signInPassword"
+        required
       />
     </div>
     <button type="submit" class="btn btn-primary mt-4 col-6 mx-auto">
