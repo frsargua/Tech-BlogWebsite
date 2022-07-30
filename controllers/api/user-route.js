@@ -7,7 +7,7 @@ router.post("/signUp", async (req, res) => {
     req.session.save(() => {
       req.session.logged_in = true;
       req.session.user_id = userData.id;
-      res.status(200).json(userData);
+      res.status(200).redirect("/");
     });
   } catch (err) {
     res.status(400).json(err);
