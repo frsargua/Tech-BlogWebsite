@@ -1,15 +1,21 @@
 <div
   class="col-11 col-md-8 col-lg-4 mx-auto h-75 d-flex align-items-center justify-content-center"
 >
-  <form id="SignUpForm" class="card container-sm p-5 rounded-3">
+  <form
+    id="SignUpForm"
+    action="/api/users/signUp"
+    method="post"
+    class="card container-sm p-5 rounded-3"
+  >
     <div class="mb-3">
       <label for="signUpEmail" class="form-label">Email address</label>
       <input
-        type="email"
-        name="SignUpInputUserEmail"
+        type="text"
+        name="user_name"
         class="form-control"
         id="signUpEmail"
         aria-describedby="emailHelp"
+        required
       />
       <div id="emailHelp" class="form-text">
         We encrypt your password using an open source hasher.
@@ -18,10 +24,11 @@
     <div class="mb-3">
       <label for="signInPassword" class="form-label">Password</label>
       <input
-        type="password"
-        name="SignUpInputUserPassword"
+        type="text"
+        name="password"
         class="form-control"
         id="signUpPassword"
+        required
       />
     </div>
     <button type="submit" class="btn btn-primary mt-4 col-6 mx-auto">
