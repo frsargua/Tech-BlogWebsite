@@ -20,26 +20,3 @@ updatePostButtonEl.click(function () {
     newPostDescriptionEl.prop("disabled", true);
   }
 });
-
-// This is for the logIn page
-let SignInFormEl = document.getElementById("SignInForm");
-if (SignInFormEl !== null) {
-  SignInFormEl.addEventListener("submit", async function (e) {
-    e.preventDefault();
-    const userSignInDetails = new FormData(SignInFormEl);
-    const formProps = Object.fromEntries(userSignInDetails);
-
-    try {
-      const response = await fetch(`/api/users/signIn`, {
-        method: "POST",
-        body: JSON.stringify(formProps),
-        headers: { "Content-Type": "application/json" },
-      });
-      if (response.ok) {
-        window.location.href = "/";
-      }
-    } catch (error) {
-      console.error("Error in POST request:", error);
-    }
-  });
-}
