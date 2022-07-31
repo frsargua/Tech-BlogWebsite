@@ -37,8 +37,34 @@ router.get("/user", async (req, res) => {
 router.post("/", async (req, res) => {
   console.log(req.body);
   try {
-    const newPost = await Post.create(req.body);
+    const newPost = await Post.create({
+      post_owner: req.session.user_id,
+      post_title: req.body.post_title,
+      post_text: req.body.description,
+    });
+    // res.status(200).json(newPost);
+    res.redirect("/dashboard");
+  } catch (error) {
+    res.status(400).json(error);
+  }
+});
+
+router.post("/update/:id", async (req, res) => {
+  console.log(req.body);
+  try {
+    const newPost = await Post.update(
+      {
+        post_title: req.body.post_title,
+        post_text: req.body.post_text,
+      },
+      {
+        where: {
+          id: req.params.id,
+        },
+      }
+    );
     res.status(200).json(newPost);
+    // res.redirect("/dashboard");
   } catch (error) {
     res.status(400).json(error);
   }
