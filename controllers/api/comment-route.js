@@ -21,8 +21,8 @@ router.post("/:id", async (req, res) => {
   try {
     const newComment = await Comment.create({
       comment_post_id: req.params.id,
-      comment_owner: req.body.user_id,
-      comment_text: req.body.description,
+      comment_owner: req.session.user_id,
+      comment_text: req.body.comment_text,
     });
     res.status(200).json(newComment);
     // res.redirect("/dashboard");
