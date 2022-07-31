@@ -1,4 +1,5 @@
-const { User, Post } = require("../models");
+const { raw } = require("express");
+const { User, Post, Comment } = require("../models");
 
 const router = require("express").Router();
 
@@ -27,13 +28,18 @@ router.get("/dashBoard", async (req, res) => {
 });
 
 router.get("/post/:id", async (req, res) => {
+  loggedIn = req.session.logged_in;
   const singlePost = await Post.findByPk(req.params.id, {
     raw: true,
   });
-  console.log(singlePost);
-  loggedIn = req.session.logged_in;
+  const commentsByPost = await Comment.findAll({
+    raw: true,
+    where: {
+      comment_post_id: req.params.id,
+    },
+  });
 
-  res.render("singlePost", { singlePost, loggedIn });
+  res.render("singlePost", { singlePost, commentsByPost, loggedIn });
 });
 
 router.get("/SignIn", async (req, res) => {
