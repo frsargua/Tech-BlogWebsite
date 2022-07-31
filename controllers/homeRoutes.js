@@ -14,8 +14,16 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/dashBoard", async (req, res) => {
+  let userPosts = await Post.findAll({
+    raw: true,
+    where: {
+      post_owner: req.session.user_id,
+    },
+  });
+  console.log(userPosts);
   loggedIn = req.session.logged_in;
-  res.render("dashBoard", { loggedIn });
+
+  res.render("dashBoard", { userPosts, loggedIn });
 });
 
 router.get("/post/:id", async (req, res) => {
