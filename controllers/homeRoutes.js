@@ -2,30 +2,42 @@ const { User, Post } = require("../models");
 
 const router = require("express").Router();
 
+let loggedIn;
+
 router.get("/", async (req, res) => {
   const allPost = await Post.findAll({
     raw: true,
   });
-  console.log(allPost);
-  res.render("all", { allPost });
+  loggedIn = req.session.logged_in;
+  console.log(loggedIn);
+  res.render("all", { allPost, loggedIn });
 });
 
 router.get("/dashBoard", async (req, res) => {
-  res.render("dashBoard");
+  loggedIn = req.session.logged_in;
+  res.render("dashBoard", { loggedIn });
 });
+
 router.get("/post/:id", async (req, res) => {
   const singlePost = await Post.findByPk(req.params.id, {
     raw: true,
   });
   console.log(singlePost);
-  res.render("singlePost", { singlePost });
+  loggedIn = req.session.logged_in;
+
+  res.render("singlePost", { singlePost, loggedIn });
 });
+
 router.get("/SignIn", async (req, res) => {
-  res.render("SignIn");
+  loggedIn = req.session.logged_in;
+
+  res.render("SignIn", { loggedIn });
 });
 
 router.get("/SignUp", async (req, res) => {
-  res.render("SignUp");
+  loggedIn = req.session.logged_in;
+
+  res.render("SignUp", { loggedIn });
 });
 
 module.exports = router;
