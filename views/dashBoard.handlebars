@@ -1,27 +1,30 @@
-<!-- -->
+<!-- Footer-->
+{{>footer}}
 <!-- -->
 <!-- -->
 
 <!-- Your posts-->
 
+{{#each userPosts}}
 <div class="mt-5">
-  <div class="col-11 col-md-8 col-lg-8 mx-auto d-flex justify-content-center">
+  <form id="updatePostCard" class="col-11 col-md-8 col-lg-8 mx-auto d-flex justify-content-center">
     <div class="accordion col-12" id="accordionExample">
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingOne">
           <button class="accordion-button bg-success bg-opacity-25" type="button" data-bs-toggle="collapse"
             data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-            <h3 type="text" class="blogPostTitle" name="|" id="|">Accordion Item #1</h3>
-            <input class="d-none blogPostTitleInput p-2 rounded-2" type="text" name="|" id="|" value="Accordion Item #1"
+            <h3 type="text" class="blogPostTitle">Accordion Item #1</h3>
+            <input class="d-none blogPostTitleInput p-2 rounded-2" type="text" name="post_title" value="Accordion Item #1"
               disabled></input>
           </button>
         </h2>
         <div id="collapseOne" class="accordion-collapse collapse  col-12" aria-labelledby="headingOne"
           data-bs-parent="#accordionExample">
           <div class="accordion-body d-flex flex-column">
-            <textarea name="newPostDescription" class="form-control newPostDescription" id="newPostDescription" rows="3"
+            {{!-- <textarea name="post_text" class="form-control newPostDescription" id="newPostDescription" rows="3"
               disabled>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Est ut magnam unde dolores? Praesentium nisi, iure necessitatibus atque possimus delectus?
-        </textarea>
+        </textarea> --}}
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Est ut magnam unde dolores? Praesentium nisi, iure necessitatibus atque possimus delectus?</p>
             <div class="col-12 d-flex justify-content-end ">
               <button type="button"
                 class="btn btn-success col-auto  ms-2 mt-2 text-decoration-none text-white updatePostButton">Update
@@ -31,14 +34,13 @@
                 Delete
               </button>
             </div>
-
           </div>
         </div>
       </div>
-
     </div>
-  </div>
+  </form>
 </div>
+{{/each}}
 
 <!-- Create Post-->
 <di id="createPost__container" class="createPost__container--hidden">
