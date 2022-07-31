@@ -21,6 +21,11 @@ Post.init(
         key: "id",
       },
     },
+    post_dateCreated: {
+      type: DataTypes.DATE,
+      defaultValue: sequelize.literal("CURRENT_TIMESTAMP"),
+      allowNull: false,
+    },
     post_title: {
       type: DataTypes.STRING,
       allowNull: false,
