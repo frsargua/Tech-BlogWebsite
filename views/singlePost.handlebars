@@ -17,10 +17,27 @@
   </div>
 </div>
 
+
+<!--Comments-->
+{{#each commentsByPost}}
+<div
+  class="col-11 col-md-8 col-lg-8 mx-auto d-flex justify-content-center my-3"
+>
+  <div class="card col-12">
+    <div class="card-body bg-success bg-opacity-25 d-flex flex-column">
+      <p class="m-0">{{comment_text}}</p>
+    </div>
+      <h5 class="ms-auto me-5">{{comment_owner}}</h5>
+  </div>
+</div>
+{{/each}}
+
+{{#if loggedIn}}
 <form
 id="commentForm"
   class="card col-8 mx-auto p-2 bg-warning bg-opacity-50"
 >
-  <textarea id="" cols="30" rows="3" name="comment_text"></textarea>
+  <textarea id="" cols="30" rows="3" name="comment_text" required ></textarea>
   <button class="col-3 ms-auto mt-1 btn btn-warning" type="submit" >Post</button>
 </form>
+{{/if}}
