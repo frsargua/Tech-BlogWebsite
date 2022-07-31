@@ -4,66 +4,48 @@
 <!-- -->
 
 <!-- Your posts-->
-
+<div id="posts-container">
 {{#each userPosts}}
 <div class="mt-5">
-  <form id="updatePostCard" class="col-11 col-md-8 col-lg-8 mx-auto d-flex justify-content-center">
-    <div class="accordion col-12" id="accordionExample">
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="headingOne">
-          <button class="accordion-button bg-success bg-opacity-25" type="button" data-bs-toggle="collapse"
-            data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-            <h3 type="text" class="blogPostTitle">Accordion Item #1</h3>
-            <input class="d-none blogPostTitleInput p-2 rounded-2" type="text" name="post_title" value="Accordion Item #1"
-              disabled></input>
-          </button>
-        </h2>
-        <div id="collapseOne" class="accordion-collapse collapse  col-12" aria-labelledby="headingOne"
-          data-bs-parent="#accordionExample">
-          <div class="accordion-body d-flex flex-column">
-            {{!-- <textarea name="post_text" class="form-control newPostDescription" id="newPostDescription" rows="3"
-              disabled>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Est ut magnam unde dolores? Praesentium nisi, iure necessitatibus atque possimus delectus?
-        </textarea> --}}
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Est ut magnam unde dolores? Praesentium nisi, iure necessitatibus atque possimus delectus?</p>
-            <div class="col-12 d-flex justify-content-end ">
-              <button type="button"
-                class="btn btn-success col-auto  ms-2 mt-2 text-decoration-none text-white updatePostButton">Update
-              </button>
-              <button type="button"
-                class="btn btn-success col-auto ms-2 mt-2 text-decoration-none text-white deletePostButton">
-                Delete
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+
+  <form class="col-11 col-md-8 col-lg-8 mx-auto  bg-success bg-opacity-25 p-3 rounded-3" id="updateFormupdate{{@index}}" post-id="{{id}}">
+    <div class="d-flex justify-content-between">
+    <input class=" blogPostTitleInput p-2 rounded-2 mb-2 border-0 " data-key="update{{@index}}" type="text" name="post_title" value="{{post_title}}" disabled>
+    <div>
+      <button  id="updateButton{{@index}}" key="update{{@index}}"  type="button">Update</button>
+      <button class="d-none updateSendButton{{@index}}" key-send="update{{@index}}" type="button">Done</button>
+      <button class=" updateSendButton{{@index}}" key-delete="{{id}}" type="button">Delete</button>
     </div>
+    </div>
+    <textarea name="post_text"   data-key="update{{@index}}" class="form-control newPostDescription bg-white border-0 overflow-hidden" id="newPostDescription" rows="auto" disabled>{{post_text}}</textarea>
+
   </form>
 </div>
 {{/each}}
-
+</div>
 <!-- Create Post-->
 <di id="createPost__container" class="createPost__container--hidden">
   <form action="/api/post/" method="post"
     class="d-flex col-11 col-md-8 col-lg-7 mx-auto createPost__card--position bg-success p-3 rounded-4 flex-column justify-content-center border">
     <div class="mb-3">
       <label for="newPostTitle" class="form-label">Title</label>
-      <input type="text" name="post_title" class="form-control" id="newPostTitle" placeholder="name@example.com" required />
+      <input type="text" name="post_title" class="form-control" id="newPostTitle" placeholder="title" required />
     </div>
     <div class="mb-3">
       <label for="newPostDescription" class="form-label">Description</label>
       <textarea name="description" class="form-control" id="newPostDescription" rows="3" required></textarea>
     </div>
     <div class="d-flex">
-      <button  type="submit" class="btn btn-warning  mt-4 col-4 mx-auto" onformchange="">
+      <button type="submit" class="btn btn-warning  mt-4 col-4 mx-auto" onformchange="">
         Submit
       </button>
-      <button  type="button" class="btn btn-warning  mt-4 col-4 mx-auto" onclick="closeCreatePostContainer()">
+      <button type="button" class="btn btn-warning  mt-4 col-4 mx-auto" onclick="closeCreatePostContainer()">
         Cancel
       </button>
     </div>
   </form>
 </di>
 
-<div class="card col-4 mx-auto mb-5 fixed-bottom"><button type="button" class="btn btn-success" onclick="showCreatePostContainer()">Create Post</button>
+<div class="card col-4 mx-auto mb-5 fixed-bottom"><button type="button" class="btn btn-success"
+    onclick="showCreatePostContainer()">Create Post</button>
 </div>
