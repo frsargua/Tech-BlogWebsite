@@ -1,4 +1,5 @@
 const { raw } = require("express");
+const withAuth = require("../utils/auth");
 const { User, Post, Comment } = require("../models");
 
 const router = require("express").Router();
@@ -14,7 +15,7 @@ router.get("/", async (req, res) => {
   res.render("all", { allPost, loggedIn });
 });
 
-router.get("/dashBoard", async (req, res) => {
+router.get("/dashBoard", withAuth, async (req, res) => {
   let userPosts = await Post.findAll({
     raw: true,
     where: {
