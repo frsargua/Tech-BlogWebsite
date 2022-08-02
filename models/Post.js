@@ -14,11 +14,11 @@ Post.init(
       autoIncrement: true,
     },
     post_owner: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
       references: {
         model: "user",
-        key: "id",
+        key: "user_name",
       },
     },
     post_dateCreated: {

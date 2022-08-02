@@ -17,7 +17,7 @@ const getPostByUser_get = async (req, res) => {
   try {
     const allPostData = await Post.findAll({
       where: {
-        post_owner: req.session.user_id,
+        post_owner: req.session.user_name,
       },
     });
     if (!allPostData) {
@@ -33,7 +33,7 @@ const getPostByUser_get = async (req, res) => {
 const createPost_post = async (req, res) => {
   try {
     const newPost = await Post.create({
-      post_owner: req.session.user_id,
+      post_owner: req.session.user_name,
       post_title: req.body.post_title,
       post_text: req.body.description,
     });
