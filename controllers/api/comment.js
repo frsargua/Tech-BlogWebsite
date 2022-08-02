@@ -4,8 +4,9 @@ const getAllComments_get = async (req, res) => {
   try {
     const getAllComments = await Comment.findAll();
     if (!getAllComments) {
-      res.status(404).json({ message: "Location not present in the database" });
-      return;
+      return res
+        .status(404)
+        .json({ message: "Location not present in the database" });
     }
     res.status(200).json(getAllComments);
   } catch (error) {
@@ -21,7 +22,6 @@ const createComment_post = async (req, res) => {
       comment_text: req.body.comment_text,
     });
     res.status(200).json(newComment);
-    // res.redirect("/dashboard");
   } catch (error) {
     res.status(400).json(error);
   }
