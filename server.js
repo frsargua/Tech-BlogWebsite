@@ -15,7 +15,7 @@ const hbs = exphbs.create({ helpers });
 const sess = {
   secret: "sequelize",
   cookie: {
-    maxAge: 86400,
+    maxAge: 86400000,
   },
   resave: false,
   saveUninitialized: true,
