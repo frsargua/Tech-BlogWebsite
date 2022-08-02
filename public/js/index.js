@@ -55,19 +55,16 @@ function closeCreatePostContainer() {
 // }
 // });
 
-async function signOut() {
-  try {
-    const response = await fetch("/api/users/signOut", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-    });
-    if (response.ok) {
-      window.location.href = "/";
-    }
-  } catch (error) {
-    console.error("Error in POST request:", error);
-  }
-}
+// async function signOut() {
+//   try {
+//     const response = await fetch("/api/users/signOut", {
+//       method: "POST",
+//       headers: { "Content-Type": "application/json" },
+//     });
+//   } catch (error) {
+//     console.error("Error in POST request:", error);
+//   }
+// }
 
 let commentFormEl = document.getElementById("commentForm");
 if (commentFormEl) {
