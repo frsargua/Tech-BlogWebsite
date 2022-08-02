@@ -1,19 +1,16 @@
 {{>footer}}
 
 <div
-  class="col-11 col-md-8 col-lg-8 mx-auto d-flex justify-content-center my-3"
+  class="col-11 col-md-8 col-lg-8 mx-auto d-flex flex-column justify-content-center my-3"
 >
+    <h5>{{session.user_name}} on the {{singlePost.post_dateCreated}}</h5>
+
   <div class="card col-12">
     <div class="card-body bg-success bg-opacity-25">
       {{singlePost.post_title}}
     </div>
     <div class="card-body">{{singlePost.post_text}}</div>
-    <button type="button" class="btn btn-success col-2 ms-auto m-1">
-      <a
-        href="/post/{{singlePost.id}}"
-        class="text-decoration-none text-white"
-      >Go To Post</a>
-    </button>
+
   </div>
 </div>
 
@@ -24,15 +21,16 @@
   class="col-11 col-md-8 col-lg-8 mx-auto d-flex justify-content-center my-3"
 >
   <div class="card col-12">
-    <div class="card-body bg-success bg-opacity-25 d-flex flex-column">
+    <div class="card-body bg-success bg-opacity-25 d-flex">
       <p class="m-0">{{comment_text}}</p>
+      <a onclick="deleteComment({{id}})" class="btn btn-success col-2 ms-auto text-decoration-none text-white">Delete</a>
     </div>
-      <h5 class="ms-auto me-5">{{comment_owner}}</h5>
+      <h5 class="ms-auto me-5">{{comment_owner}} on the {{comment_dateCreated}}</h5>
   </div>
 </div>
 {{/each}}
 
-{{#if loggedIn}}
+{{#if session.logged_in}}
 <form
 id="commentForm"
   class="card col-8 mx-auto p-2 bg-warning bg-opacity-50"
