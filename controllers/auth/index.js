@@ -6,24 +6,29 @@ const login_post = async (req, res) => {
   const userData = await User.findOne({
     where: { user_name: user_name },
   });
+
   if (!userData) {
-    req.session.error = "Incorrect username";
-    return res.status(400).redirect("/signin");
+    return req.session.save(() => {
+      req.session.error = "Incorrect username";
+      res.status(400).redirect("/signin");
+    });
   }
 
   const validPassword = await userData.checkPassword(password);
 
   if (!validPassword) {
-    req.session.error = "Invalid password";
-    return res.status(400).redirect("/signin");
+    req.session.save(() => {
+      req.session.error = "Invalid password";
+      return res.status(400).redirect("/signin");
+    });
+  } else {
+    req.session.save(() => {
+      req.session.user_id = userData.id;
+      req.session.user_name = userData.user_name;
+      req.session.logged_in = true;
+      res.redirect("/dashboard");
+    });
   }
-
-  req.session.save(() => {
-    req.session.user_id = userData.id;
-    req.session.user_name = userData.user_name;
-    req.session.logged_in = true;
-    res.redirect("/dashboard");
-  });
 };
 
 const singUp_post = async (req, res) => {
@@ -32,6 +37,7 @@ const singUp_post = async (req, res) => {
     req.session.save(() => {
       req.session.logged_in = true;
       req.session.user_id = userData.id;
+      req.session.user_name = userData.user_name;
       res.status(200).redirect("/");
     });
   } catch (err) {
