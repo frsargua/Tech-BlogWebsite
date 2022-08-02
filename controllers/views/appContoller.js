@@ -1,17 +1,18 @@
-const { User, Post, Comment } = require("../../models");
+const { Post, Comment } = require("../../models");
 
 const landingPage_get = async (req, res) => {
-  let { logged_in: loggedIn } = req.session;
+  let session = req.session;
+
   const allPost = await Post.findAll({
     raw: true,
   });
-  res.render("all", { allPost, loggedIn });
+  console.log(session);
+  res.render("all", { allPost, session });
 };
 
 const login_get = async (req, res) => {
-  const error = req.session.error;
+  const { logged_in: loggedIn, error } = await req.session;
   delete req.session.error;
-  let loggedIn = req.session.logged_in;
   res.render("SignIn", { loggedIn, error });
 };
 
@@ -21,7 +22,7 @@ const sigUps_get = async (req, res) => {
 };
 
 const getPostById = async (req, res) => {
-  let { logged_in: loggedIn } = req.session;
+  let session = req.session;
   let { id: postId } = req.params;
 
   const singlePost = await Post.findByPk(postId, {
@@ -34,20 +35,21 @@ const getPostById = async (req, res) => {
       comment_post_id: postId,
     },
   });
-
-  res.render("singlePost", { singlePost, commentsByPost, loggedIn });
+  console.log(singlePost);
+  res.render("singlePost", { singlePost, commentsByPost, session });
 };
 
 const dashBoard_get = async (req, res) => {
-  let { user_id, logged_in: loggedIn } = req.session;
+  let session = req.session;
+  console.log(session.user_name);
   let userPosts = await Post.findAll({
     raw: true,
     where: {
-      post_owner: user_id,
+      post_owner: session.user_name,
     },
   });
 
-  res.render("dashBoard", { userPosts, loggedIn });
+  res.render("dashBoard", { userPosts, session });
 };
 
 module.exports = {
