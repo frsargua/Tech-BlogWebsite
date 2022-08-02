@@ -1,55 +1,23 @@
 const { raw } = require("express");
-const withAuth = require("../utils/auth");
-const { User, Post, Comment } = require("../models");
+const { withAuth, withAuthLogged } = require("../utils/auth");
+const {
+  login_get,
+  dashBoard_get,
+  landing_page,
+  getPostById,
+} = require("./appContoller");
 
 const router = require("express").Router();
 
-let loggedIn;
+router.get("/", landing_page);
 
-router.get("/", async (req, res) => {
-  const allPost = await Post.findAll({
-    raw: true,
-  });
-  loggedIn = req.session.logged_in;
-  console.log(loggedIn);
-  res.render("all", { allPost, loggedIn });
-});
+router.get("/dashBoard", withAuth, dashBoard_get);
 
-router.get("/dashBoard", withAuth, async (req, res) => {
-  let userPosts = await Post.findAll({
-    raw: true,
-    where: {
-      post_owner: req.session.user_id,
-    },
-  });
-  console.log(userPosts);
-  loggedIn = req.session.logged_in;
+router.get("/post/:id", getPostById);
 
-  res.render("dashBoard", { userPosts, loggedIn });
-});
+router.get("/SignIn", withAuthLogged, login_get);
 
-router.get("/post/:id", async (req, res) => {
-  loggedIn = req.session.logged_in;
-  const singlePost = await Post.findByPk(req.params.id, {
-    raw: true,
-  });
-  const commentsByPost = await Comment.findAll({
-    raw: true,
-    where: {
-      comment_post_id: req.params.id,
-    },
-  });
-
-  res.render("singlePost", { singlePost, commentsByPost, loggedIn });
-});
-
-router.get("/SignIn", async (req, res) => {
-  loggedIn = req.session.logged_in;
-
-  res.render("SignIn", { loggedIn });
-});
-
-router.get("/SignUp", async (req, res) => {
+router.get("/SignUp", withAuthLogged, async (req, res) => {
   loggedIn = req.session.logged_in;
 
   res.render("SignUp", { loggedIn });
