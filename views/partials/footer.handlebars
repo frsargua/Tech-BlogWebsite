@@ -15,16 +15,14 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
-        {{#if loggedIn}}
-
+        {{#if session.logged_in}}
           <li class="nav-item">
             <a class="nav-link" href="/DashBoard">DashBoard</a>
           </li>
         {{/if}}
-
         <li class="nav-item">
-          {{#if loggedIn}}
-            <a class="nav-link" href="/api/users/signout">Sign Out</a>
+          {{#if session.logged_in}}
+            <a class="nav-link" href="/auth/signout">Sign Out</a>
           {{else}}
             <a class="nav-link" href="/SignIn">Sign In</a>
           {{/if}}
