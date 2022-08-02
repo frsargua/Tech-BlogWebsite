@@ -22,6 +22,7 @@ const createComment_post = async (req, res) => {
       comment_text: req.body.comment_text,
     });
     res.status(200).json(newComment);
+    // res.status(200).redirect(`/post/${req.params.id}`);
   } catch (error) {
     res.status(400).json(error);
   }
