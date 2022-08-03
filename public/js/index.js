@@ -35,57 +35,24 @@ function closeCreatePostContainer() {
     .addClass("createPost__container--hidden");
 }
 
-// let updatePostForm = document.getElementById("updatePostCard");
-// console.log(updatePostForm);
-// updatePostForm.addEventListener("submit", async (e) => {
-//   e.preventDefault();
-
-//   const signUpData = new FormData(updatePostForm);
-//   let signUpFormProps = Object.fromEntries(signUpData);
-//   console.log(signUpFormProps);
-
-// Login fetch request
-// const response = await fetch("/api/user/signUp", {
-//   method: "POST",
-//   body: JSON.stringify(signUpFormProps),
-//   headers: { "Content-Type": "application/json" },
-// });
-// if (response.ok) {
-//   window.location.href = "/";
-// }
-// });
-
-// async function signOut() {
-//   try {
-//     const response = await fetch("/api/users/signOut", {
-//       method: "POST",
-//       headers: { "Content-Type": "application/json" },
-//     });
-//   } catch (error) {
-//     console.error("Error in POST request:", error);
-//   }
-// }
+function error(err) {
+  console.log("Error: ", err);
+}
 
 let commentFormEl = document.getElementById("commentForm");
 if (commentFormEl) {
   commentFormEl.addEventListener("submit", async (e) => {
     e.preventDefault();
-
     let newComment = new FormData(commentFormEl);
     let newCommentProps = Object.fromEntries(newComment);
-
     let postId = window.location.href.substring(
       window.location.href.lastIndexOf("/") + 1
     );
-
-    const response = await fetch(`/api/comment/${postId}`, {
+    fetch(`/api/comment/${postId}`, {
       method: "POST",
       body: JSON.stringify(newCommentProps),
       headers: { "Content-Type": "application/json" },
-    });
-    if (response.ok) {
-      window.location.href = "/";
-    }
+    }).then((data) => location.reload(), error);
   });
 }
 
@@ -122,22 +89,18 @@ mainContainer.on("click", async function (e) {
       .forEach((el) => {
         el.disabled = true;
       });
-
-    // if (response.ok) {
-    //   window.location.href = "/";
-    // }
   } else if (clickedEl.hasAttribute("key-delete")) {
     let keyDeleteEl = clickedEl.getAttribute("key-delete");
-    console.log(`/api/post/${keyDeleteEl}`);
-
     const response = await fetch(`/api/post/${keyDeleteEl}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
-    });
+    }).then(() => location.reload());
   }
 });
 
-function sendData(e) {
-  e.preventDefault();
-  alert("true");
+async function deleteComment(id) {
+  const response = await fetch(`/api/comment/${id}`, {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+  }).then(() => location.reload(), error());
 }
