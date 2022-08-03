@@ -46,8 +46,29 @@ const deleteComment_delete = async (req, res) => {
   }
 };
 
+const updateComment_put = async (req, res) => {
+  console.log(req.body);
+  try {
+    const updateCommentData = await Comment.update(
+      {
+        comment_text: req.body.comment_text,
+      },
+      {
+        where: {
+          id: req.params.id,
+        },
+      }
+    );
+    // res.status(200).json(updateCommentData);
+    res.redirect(`/post/${req.params.location}`);
+  } catch (error) {
+    res.status(400).json(error);
+  }
+};
+
 module.exports = {
   getAllComments_get,
   createComment_post,
   deleteComment_delete,
+  updateComment_put,
 };
