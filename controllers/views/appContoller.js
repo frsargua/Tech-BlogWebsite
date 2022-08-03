@@ -1,3 +1,4 @@
+const e = require("express");
 const { Post, Comment } = require("../../models");
 
 const landingPage_get = async (req, res) => {
@@ -35,13 +36,17 @@ const getPostById = async (req, res) => {
       comment_post_id: postId,
     },
   });
-  console.log(singlePost);
-  res.render("singlePost", { singlePost, commentsByPost, session });
+  // console.log(commentsByPost);
+  let commentsByPostVerifier = commentsByPost.map((el) => {
+    el.isOwner = el.comment_owner == session.user_name;
+    return el;
+  });
+
+  res.render("singlePost", { singlePost, commentsByPostVerifier, session });
 };
 
 const dashBoard_get = async (req, res) => {
   let session = req.session;
-  console.log(session.user_name);
   let userPosts = await Post.findAll({
     raw: true,
     where: {
