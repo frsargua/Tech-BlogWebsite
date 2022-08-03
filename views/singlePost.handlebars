@@ -1,9 +1,7 @@
 {{>footer}}
 
-<div
-  class="col-11 col-md-8 col-lg-8 mx-auto d-flex flex-column justify-content-center my-3"
->
-    <h5>{{session.user_name}} on the {{singlePost.post_dateCreated}}</h5>
+<div class="col-11 col-md-8 col-lg-8 mx-auto d-flex flex-column justify-content-center my-3">
+  <h5>{{session.user_name}} on the {{singlePost.post_dateCreated}}</h5>
 
   <div class="card col-12">
     <div class="card-body bg-success bg-opacity-25">
@@ -16,26 +14,39 @@
 
 
 <!--Comments-->
-{{#each commentsByPost}}
-<div
-  class="col-11 col-md-8 col-lg-8 mx-auto d-flex justify-content-center my-3"
->
+{{#each commentsByPostVerifier}}
+<div class="col-11 col-md-8 col-lg-8 mx-auto d-flex justify-content-center my-3">
   <div class="card col-12">
-    <div class="card-body bg-success bg-opacity-25 d-flex">
-      <p class="m-0">{{comment_text}}</p>
-      <a onclick="deleteComment({{id}})" class="btn btn-success col-2 ms-auto text-decoration-none text-white">Delete</a>
-    </div>
+    {{#if isOwner}}
+    <form class="card-body bg-success bg-opacity-25 d-flex justify-content-between"
+      action="/api/comment/update/{{id}}/{{../singlePost.id}}" method="post">
+      <textarea class="col-10 newPostDescription bg-white border-0 overflow-hidden" rows="auto"
+        name="comment_text">{{comment_text}}</textarea>
+      <div class="d-flex flex-column col-2">
+        <a onclick="deleteComment({{id}})"
+          class="btn btn-success col-12 ms-auto  my-auto text-decoration-none text-white">Delete</a>
+        <button type="submit" class=" my-auto ms-auto  col-12 btn btn-warning">update</button>
+      </div>
+      {{else}}
+      <form class="card-body bg-success bg-opacity-25 d-flex justify-content-between"
+        action="/api/comment/update/{{id}}/{{../singlePost.id}}" method="post">
+        <p class="col-12 newPostDescription bg-white border-0 p-2 rounded-3" 
+         >{{comment_text}}</textarea>
+      </form>
+
+      {{/if}}
+
+    </form>
+    <div class="d-flex">
       <h5 class="ms-auto me-5">{{comment_owner}} on the {{comment_dateCreated}}</h5>
+    </div>
   </div>
 </div>
 {{/each}}
 
 {{#if session.logged_in}}
-<form
-id="commentForm"
-  class="card col-8 mx-auto p-2 bg-warning bg-opacity-50"
->
-  <textarea id="" cols="30" rows="3" name="comment_text" required ></textarea>
-  <button class="col-3 ms-auto mt-1 btn btn-warning" type="submit" >Post</button>
+<form action="/api/post/" method="post" id="commentForm" class="card col-8 mx-auto p-2 bg-warning bg-opacity-50">
+  <textarea id="" cols="30" rows="3" name="comment_text" required></textarea>
+  <button class="col-3 ms-auto mt-1 btn btn-warning" type="submit">Post</button>
 </form>
 {{/if}}
