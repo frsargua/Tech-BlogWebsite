@@ -25,8 +25,9 @@ Comment.init(
       allowNull: false,
     },
     comment_dateCreated: {
-      type: DataTypes.DATE,
-      defaultValue: sequelize.literal("CURRENT_TIMESTAMP"),
+      type: DataTypes.DATEONLY,
+      defaultValue: DataTypes.NOW,
+      // defaultValue: sequelize.literal("CURRENT_TIMESTAMP"),
       allowNull: false,
     },
     comment_text: {

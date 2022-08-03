@@ -22,8 +22,9 @@ Post.init(
       },
     },
     post_dateCreated: {
-      type: DataTypes.DATE,
-      defaultValue: sequelize.literal("CURRENT_TIMESTAMP"),
+      type: DataTypes.DATEONLY,
+      defaultValue: DataTypes.NOW,
+      // defaultValue: sequelize.literal("CURRENT_TIMESTAMP"),
       allowNull: false,
     },
     post_title: {
